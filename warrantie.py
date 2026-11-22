@@ -4,10 +4,6 @@ from datetime import date, timedelta
 from contextlib import contextmanager
 
 
-# ==================================================
-# 1. DATABASE CONFIGURATION
-# ==================================================
-
 DB_NAME = "warrantie.db"
 
 
@@ -28,10 +24,6 @@ def connect_db():
     finally:
         conn.close()
 
-
-# ==================================================
-# 2. DATABASE INITIALIZATION
-# ==================================================
 
 def initialize_database():
 
@@ -76,10 +68,6 @@ def initialize_database():
             )
         """)
 
-
-# ==================================================
-# 3. INPUT VALIDATION
-# ==================================================
 
 def get_required_input(message):
 
@@ -135,10 +123,6 @@ def get_claim_id():
             print("Invalid Claim ID. Please enter a number.")
 
 
-# ==================================================
-# 4. REGISTER NEW PURCHASE
-# ==================================================
-
 def register_purchase():
 
     print("\n========== REGISTER NEW PURCHASE ==========")
@@ -169,7 +153,7 @@ def register_purchase():
 
         with connect_db() as conn:
 
-            # Check if customer already exists
+            
             customer = conn.execute("""
                 SELECT customer_id
                 FROM customers
@@ -190,7 +174,7 @@ def register_purchase():
 
                 customer_id = cursor.lastrowid
 
-            # Register purchase
+           
             conn.execute("""
                 INSERT INTO purchases (
                     customer_id,
@@ -226,10 +210,6 @@ def register_purchase():
     except sqlite3.Error as error:
         print("\nDatabase Error:", error)
 
-
-# ==================================================
-# 5. SEARCH PURCHASE
-# ==================================================
 
 def search_purchase():
 
@@ -291,10 +271,6 @@ def search_purchase():
         print("\nDatabase Error:", error)
 
 
-# ==================================================
-# 6. SUBMIT WARRANTY CLAIM
-# ==================================================
-
 def submit_claim():
 
     print("\n========== SUBMIT WARRANTY CLAIM ==========")
@@ -353,10 +329,6 @@ def submit_claim():
         print("\nDatabase Error:", error)
 
 
-# ==================================================
-# 7. VIEW ALL CLAIMS
-# ==================================================
-
 def view_claims():
 
     print("\n========== ALL WARRANTY CLAIMS ==========")
@@ -407,9 +379,6 @@ def view_claims():
         print("\nDatabase Error:", error)
 
 
-# ==================================================
-# 8. REVIEW CLAIM
-# ==================================================
 
 def review_claim():
 
@@ -466,10 +435,6 @@ def review_claim():
     except sqlite3.Error as error:
         print("\nDatabase Error:", error)
 
-
-# ==================================================
-# 9. RECORD REPAIR OR REPLACEMENT
-# ==================================================
 
 def record_resolution():
 
@@ -532,9 +497,6 @@ def record_resolution():
         print("\nDatabase Error:", error)
 
 
-# ==================================================
-# 10. TRANSACTION REPORTS
-# ==================================================
 
 def view_reports():
 
@@ -602,9 +564,6 @@ def view_reports():
         print("\nDatabase Error:", error)
 
 
-# ==================================================
-# 11. MAIN MENU
-# ==================================================
 
 def main():
 
@@ -661,9 +620,6 @@ def main():
             print("\nInvalid choice. Please select 1-8.")
 
 
-# ==================================================
-# 12. PROGRAM EXECUTION
-# ==================================================
 
 if __name__ == "__main__":
     main()
